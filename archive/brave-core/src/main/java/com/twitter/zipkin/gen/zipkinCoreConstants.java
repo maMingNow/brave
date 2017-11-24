@@ -20,6 +20,7 @@ public class zipkinCoreConstants {
    * Annotation.host is not the server. It is the host which logged the send
    * event, almost always the client. When logging CLIENT_SEND, instrumentation
    * should also log the SERVER_ADDR.
+   * 客户端发送请求 client send的简称
    */
   public static final String CLIENT_SEND = "cs";
 
@@ -34,6 +35,8 @@ public class zipkinCoreConstants {
    * Annotation.host is not the server. It is the host which logged the receive
    * event, almost always the client. The actual endpoint of the server is
    * recorded separately as SERVER_ADDR when CLIENT_SEND is logged.
+   *
+   * 客户端接收恢复内容 client response的简称
    */
   public static final String CLIENT_RECV = "cr";
 
@@ -51,6 +54,7 @@ public class zipkinCoreConstants {
    * Annotation.host is not the client. It is the host which logged the send
    * event, almost always the server. The actual endpoint of the client is
    * recorded separately as CLIENT_ADDR when SERVER_RECV is logged.
+   * server端发送信息给客户端,server send的简称
    */
   public static final String SERVER_SEND = "ss";
 
@@ -68,6 +72,7 @@ public class zipkinCoreConstants {
    * Annotation.host is not the client. It is the host which logged the receive
    * event, almost always the server. When logging SERVER_RECV, instrumentation
    * should also log the CLIENT_ADDR.
+   * server端接收信息,信息从客户端发送过来的,server response的简称
    */
   public static final String SERVER_RECV = "sr";
 

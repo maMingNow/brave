@@ -7,7 +7,9 @@ import zipkin2.reporter.AsyncReporter;
 import zipkin2.reporter.ReporterMetrics;
 import zipkin2.reporter.Sender;
 
-/** Spring XML config does not support chained builders. This converts accordingly */
+/** Spring XML config does not support chained builders. This converts accordingly
+ * sping配置如何上报zipkin内容
+ **/
 public class AsyncReporterFactoryBean extends AbstractFactoryBean<AsyncReporter> {
   Sender sender;
   SpanBytesEncoder encoder = SpanBytesEncoder.JSON_V1;

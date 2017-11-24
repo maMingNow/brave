@@ -2,15 +2,16 @@ package com.twitter.zipkin.gen;
 
 import javax.annotation.Generated;
 
+//参数值类型
 @Generated("thrift")
 public enum AnnotationType {
-  BOOL(0),
-  BYTES(1),
-  I16(2),
-  I32(3),
-  I64(4),
-  DOUBLE(5),
-  STRING(6);
+  BOOL(0),//boolean
+  BYTES(1),//字节数组
+  I16(2),//2个字节的整数
+  I32(3),//4个字节的整数
+  I64(4),//8个字节的整数
+  DOUBLE(5),//double类型
+  STRING(6);//字符串类型
 
   private final int value;
 

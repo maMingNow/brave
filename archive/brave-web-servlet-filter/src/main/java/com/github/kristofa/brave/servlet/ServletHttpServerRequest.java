@@ -13,11 +13,13 @@ public class ServletHttpServerRequest implements HttpServerRequest {
         this.request = request;
     }
 
+    //获取请求头key对应的值
     @Override
     public String getHttpHeaderValue(String headerName) {
         return request.getHeader(headerName);
     }
 
+    //获取请求的url?query组成的URI对象
     @Override
     public URI getUri() {
         StringBuffer url = request.getRequestURL();
@@ -27,6 +29,7 @@ public class ServletHttpServerRequest implements HttpServerRequest {
         return URI.create(url.toString());
     }
 
+    //http请求的方法
     @Override
     public String getHttpMethod() {
         return request.getMethod();

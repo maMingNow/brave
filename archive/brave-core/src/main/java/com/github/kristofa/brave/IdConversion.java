@@ -25,6 +25,7 @@ public class IdConversion {
    *
    * @param id trace, span or parent span id.
    * @return String representation.
+   * 将long类型的转换成16进制的字符串
    */
   public static String convertToString(final long id) {
     return Long.toHexString(id);
@@ -33,6 +34,7 @@ public class IdConversion {
   /**
    * Parses a 1 to 32 character lower-hex string with no prefix into an unsigned long, tossing any
    * bits higher than 64.
+   * 将16进制的字符串转化成long
    */
   public static long convertToLong(String lowerHex) {
     int length = lowerHex.length();

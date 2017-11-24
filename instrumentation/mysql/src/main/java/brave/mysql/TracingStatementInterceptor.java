@@ -15,6 +15,7 @@ import zipkin2.Endpoint;
 
 /**
  * A MySQL statement interceptor that will report to Zipkin how long each statement takes.
+ * 拦截mysql的sql,报告给zipkin该sql的执行时间
  *
  * <p>To use it, append <code>?statementInterceptors=brave.mysql.TracingStatementInterceptor</code>
  * to the end of the connection url.
@@ -80,7 +81,7 @@ public class TracingStatementInterceptor implements StatementInterceptorV2 {
   static void parseServerAddress(Connection connection, Span span) {
     try {
       URI url = URI.create(connection.getMetaData().getURL().substring(5)); // strip "jdbc:"
-      int port = url.getPort() == -1 ? 3306 : url.getPort();
+      int port = url.getPort() == -1 ? 3306 : url.getPort();//获取端口号,默认3306
       String remoteServiceName = connection.getProperties().getProperty("zipkinServiceName");
       if (remoteServiceName == null || "".equals(remoteServiceName)) {
         String databaseName = connection.getCatalog();

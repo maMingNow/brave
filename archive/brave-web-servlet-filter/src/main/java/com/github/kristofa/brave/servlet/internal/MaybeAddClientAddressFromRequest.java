@@ -23,12 +23,14 @@ public final class MaybeAddClientAddressFromRequest
     super(brave);
   }
 
+  //解析远程的ip字节数组
   @Override protected byte[] parseAddressBytes(HttpServletRequest input) {
     byte[] addressBytes = ipStringToBytes(input.getHeader("X-Forwarded-For"));
     if (addressBytes == null) addressBytes = ipStringToBytes(input.getRemoteAddr());
     return addressBytes;
   }
 
+  //获取请求的远程端口
   @Override protected int parsePort(HttpServletRequest input) {
     return input.getRemotePort();
   }

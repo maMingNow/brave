@@ -7,7 +7,9 @@ import java.util.Random;
 
 /** Internal code that affects the {@linkplain Span} type. */
 abstract class SpanFactory {
-  /** Returns the next span ID derived from the input, or a new trace if null. */
+  /** Returns the next span ID derived from the input, or a new trace if null.
+   * 返回下一个span的id
+   **/
   abstract Span nextSpan(@Nullable SpanId maybeParent);
 
   /**
@@ -15,6 +17,7 @@ abstract class SpanFactory {
    * ensure a sampling decision has been made. If the span passed sampling, we assume this is a
    * shared span, one where the caller and the current tracer report to the same span IDs. If no
    * sampling decision occurred yet, we have exclusive access to this span ID.
+   * join是重新使用相同的trace和span的id,从请求中抽取出来
    */
   abstract Span joinSpan(SpanId context);
 
@@ -56,7 +59,7 @@ abstract class SpanFactory {
       if (maybeParent == null) { // new trace
         return Brave.toSpan(SpanId.builder()
             .traceIdHigh(traceId128Bit() ? nextTraceIdHigh(randomGenerator()) : 0L)
-            .traceId(newSpanId)
+            .traceId(newSpanId)//第一个spanid与traceid相同
             .spanId(newSpanId)
             .sampled(sampler().isSampled(newSpanId))
             .build());
@@ -85,6 +88,7 @@ abstract class SpanFactory {
     }
   }
 
+  //前面32个bit是跟时间有关系
   static long nextTraceIdHigh(Random prng) {
     long epochSeconds = System.currentTimeMillis() / 1000;
     int random = prng.nextInt();

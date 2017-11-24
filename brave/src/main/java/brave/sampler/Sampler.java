@@ -14,6 +14,7 @@ package brave.sampler;
 // abstract for factory-method support on Java language level 7
 public abstract class Sampler {
 
+  //一定抽样,无论给的是哪个traceId都要参与抽样
   public static final Sampler ALWAYS_SAMPLE = new Sampler() {
     @Override public boolean isSampled(long traceId) {
       return true;
@@ -24,6 +25,8 @@ public abstract class Sampler {
     }
   };
 
+
+  //绝不会抽样
   public static final Sampler NEVER_SAMPLE = new Sampler() {
     @Override public boolean isSampled(long traceId) {
       return false;
@@ -34,7 +37,9 @@ public abstract class Sampler {
     }
   };
 
-  /** Returns true if the trace ID should be measured. */
+  /** Returns true if the trace ID should be measured.
+   * 判断该trace是否参与抽样度量
+   **/
   public abstract boolean isSampled(long traceId);
 
   /**
@@ -44,6 +49,7 @@ public abstract class Sampler {
    * If you have high volumes of traffic, consider {@link BoundarySampler}.
    *
    * @param rate minimum sample rate is 0.01, or 1% of traces
+   * 返回一个抽样算法
    */
   public static Sampler create(float rate) {
     return CountingSampler.create(rate);

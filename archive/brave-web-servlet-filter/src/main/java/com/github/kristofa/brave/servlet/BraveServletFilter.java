@@ -58,6 +58,7 @@ public class BraveServletFilter implements Filter {
             return this;
         }
 
+        //this指代的是Builder
         public BraveServletFilter build() {
             return new BraveServletFilter(this);
         }

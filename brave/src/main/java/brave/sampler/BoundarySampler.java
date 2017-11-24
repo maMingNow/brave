@@ -17,7 +17,7 @@ import java.util.Random;
  * <p>Based on https://github.com/twitter/finagle/blob/develop/finagle-zipkin/src/main/scala/com/twitter/finagle/zipkin/thrift/Sampler.scala#L68
  */
 public final class BoundarySampler extends Sampler {
-  static final long SALT = new Random().nextLong();
+  static final long SALT = new Random().nextLong();//随机产生一个很大的long值
 
   /**
    * @param rate 0 means never sample, 1 means always sample. Otherwise minimum sample rate is

@@ -16,6 +16,7 @@ import static com.github.kristofa.brave.internal.Util.equal;
  * This is an internal type representing a span in the trace tree.
  *
  * @deprecated Replaced by {@code brave.Span}
+ * 仅仅表示一个链路中的一个节点信息
  */
 @Deprecated
 @Generated("thrift")

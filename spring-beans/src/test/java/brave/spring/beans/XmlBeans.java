@@ -5,6 +5,7 @@ import org.springframework.context.support.AbstractXmlApplicationContext;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 
+//可以组装成spring的配置信息
 class XmlBeans extends AbstractXmlApplicationContext {
   static final Charset UTF_8 = Charset.forName("UTF-8");
 

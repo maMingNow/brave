@@ -89,10 +89,11 @@ public final class HttpSpanCollector extends AbstractSpanCollector {
   // Visible for testing. Ex when tests need to explicitly control flushing, set interval to 0.
   HttpSpanCollector(String baseUrl, Config config, SpanCollectorMetricsHandler metrics) {
     super(SpanCodec.JSON, metrics,  config.flushInterval());
-    this.url = baseUrl + (baseUrl.endsWith("/") ? "" : "/") + "api/v1/spans";
+    this.url = baseUrl + (baseUrl.endsWith("/") ? "" : "/") + "api/v1/spans";//创建发送的路径baseUrl/api/v1/spans
     this.config = config;
   }
 
+  //参数是要发送的数据字节数组---span组成的字节数组
   @Override
   protected void sendSpans(byte[] json) throws IOException {
     // intentionally not closing the connection, so as to use keep-alives
@@ -101,19 +102,19 @@ public final class HttpSpanCollector extends AbstractSpanCollector {
     connection.setReadTimeout(config.readTimeout());
     connection.setRequestMethod("POST");
     connection.addRequestProperty("Content-Type", "application/json");
-    if (config.compressionEnabled()) {
-      connection.addRequestProperty("Content-Encoding", "gzip");
+    if (config.compressionEnabled()) {//使用压缩方式传输
+      connection.addRequestProperty("Content-Encoding", "gzip");//告诉服务器用gzip压缩的数据
       ByteArrayOutputStream gzipped = new ByteArrayOutputStream();
       try (GZIPOutputStream compressor = new GZIPOutputStream(gzipped)) {
         compressor.write(json);
       }
-      json = gzipped.toByteArray();
+      json = gzipped.toByteArray();//此时json数据就是gzip压缩后的数据
     }
     connection.setDoOutput(true);
-    connection.setFixedLengthStreamingMode(json.length);
-    connection.getOutputStream().write(json);
+    connection.setFixedLengthStreamingMode(json.length);//设置发送的数据长度
+    connection.getOutputStream().write(json);//将数据发送出去
 
-    try (InputStream in = connection.getInputStream()) {
+    try (InputStream in = connection.getInputStream()) {//等待服务器返回结果
       while (in.read() != -1) ; // skip
     } catch (IOException e) {
       try (InputStream err = connection.getErrorStream()) {

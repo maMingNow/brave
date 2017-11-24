@@ -79,16 +79,16 @@ public abstract class FlushingSpanCollector implements SpanCollector, Flushable,
     Flusher(Flushable flushable, int flushInterval, final String threadPoolName) {
       this.flushable = flushable;
       this.scheduler = Executors.newSingleThreadScheduledExecutor(
-          r -> new Thread(r, threadPoolName));
+          r -> new Thread(r, threadPoolName));//如何产生一个线程
       ScheduledFuture<?> future =
-          this.scheduler.scheduleWithFixedDelay(this, 0, flushInterval, SECONDS);
+          this.scheduler.scheduleWithFixedDelay(this, 0, flushInterval, SECONDS);//定期调用run方法
       if (future.isCancelled()) throw new IllegalStateException("cancelled flushing spans");
     }
 
     @Override
     public void run() {
       try {
-        flushable.flush();
+        flushable.flush();//定期调用run方法,即定期会调用flushable的flush方法
       } catch (IOException ignored) {
       }
     }

@@ -8,7 +8,7 @@ import java.net.InetAddress;
 
 /**
  * {@link ServerClientAndLocalSpanState} implementation that keeps trace state using a ThreadLocal variable.
- * 
+ * 在本地线程中保持trace的状态
  * @author kristof
  */
 public final class ThreadLocalServerClientAndLocalSpanState implements ServerClientAndLocalSpanState {
@@ -24,7 +24,7 @@ public final class ThreadLocalServerClientAndLocalSpanState implements ServerCli
 
     private final static ThreadLocal<Span> currentLocalSpan = new ThreadLocal<Span>();
 
-    private final Endpoint endpoint;
+    private final Endpoint endpoint;//表示本地的一个对象
 
     // visible for testing
     public static void clear() {

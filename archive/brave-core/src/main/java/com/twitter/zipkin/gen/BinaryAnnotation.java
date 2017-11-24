@@ -24,6 +24,7 @@ import static com.github.kristofa.brave.internal.Util.equal;
  * the key "http.url" might be different on the client and server side due to
  * rewriting, like "/api/v1/myresource" vs "/myresource. Via the host field,
  * you can see the different points of view, which often help in debugging.
+ * value是字节数组的类型值
  */
 @Generated("thrift")
 public class BinaryAnnotation implements Serializable {
@@ -36,6 +37,7 @@ public class BinaryAnnotation implements Serializable {
    *
    * @param key {@link zipkin.Constants#CLIENT_ADDR} or {@link zipkin.Constants#SERVER_ADDR}
    * @param endpoint associated endpoint.
+   * 添加一个boolean值
    */
   public static BinaryAnnotation address(String key, Endpoint endpoint) {
     return create(key, new byte[] {1}, AnnotationType.BOOL, checkNotNull(endpoint, "endpoint"));

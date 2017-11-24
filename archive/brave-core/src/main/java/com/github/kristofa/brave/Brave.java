@@ -27,10 +27,10 @@ public class Brave {
     private final ServerTracer serverTracer;
     private final ClientTracer clientTracer;
     private final LocalTracer localTracer;
-    private final ServerRequestInterceptor serverRequestInterceptor;
-    private final ServerResponseInterceptor serverResponseInterceptor;
-    private final ClientRequestInterceptor clientRequestInterceptor;
-    private final ClientResponseInterceptor clientResponseInterceptor;
+    private final ServerRequestInterceptor serverRequestInterceptor;//拦截sr---服务端接收数据
+    private final ServerResponseInterceptor serverResponseInterceptor;//拦截ss--服务端发送数据
+    private final ClientRequestInterceptor clientRequestInterceptor;//拦截cs---客户端发送出去
+    private final ClientResponseInterceptor clientResponseInterceptor;//拦截cr---客户端恢复的内容
     private final AnnotationSubmitter serverSpanAnnotationSubmitter;
     private final ServerSpanThreadBinder serverSpanThreadBinder;
     private final ClientSpanThreadBinder clientSpanThreadBinder;
@@ -47,7 +47,7 @@ public class Brave {
      */
     public static class Builder {
         final Logger logger = Logger.getLogger(Brave.class.getName());
-        final SpanFactory.Default.Builder spanFactoryBuilder = SpanFactory.Default.builder();
+        final SpanFactory.Default.Builder spanFactoryBuilder = SpanFactory.Default.builder();//如何产生spanid对象
         private final ServerClientAndLocalSpanState state;
         final Endpoint localEndpoint;
         private boolean allowNestedLocalSpans = false;

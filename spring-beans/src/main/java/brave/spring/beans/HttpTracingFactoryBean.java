@@ -10,6 +10,7 @@ import org.springframework.beans.factory.FactoryBean;
 /** Spring XML config does not support chained builders. This converts accordingly */
 public class HttpTracingFactoryBean implements FactoryBean<HttpTracing> {
 
+  //可以通过依赖注入进来
   Tracing tracing;
   HttpClientParser clientParser;
   HttpServerParser serverParser;
